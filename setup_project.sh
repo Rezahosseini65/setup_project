@@ -1,43 +1,43 @@
 #!/bin/bash
 
-# بررسی اینکه اسکریپت قابل اجرا باشد
+# Check if the script is executable, if not, make it executable
 if [[ ! -x "$0" ]]; then
   chmod +x "$0"
   echo "Made the script executable."
 fi
 
-# بررسی نصب بودن tmux و نصب آن در صورت نیاز
+# Check if tmux is installed, and install it if missing
 if ! command -v tmux &>/dev/null; then
   echo "tmux is not installed. Installing tmux..."
   sudo apt update
   sudo apt install -y tmux
 fi
 
-# مسیر ثابت
+# Base directory where projects are stored
 BASE_DIR="/home/reza/djprojects"
 
-# پرسیدن نام پوشه پروژه از کاربر
+# Prompt the user to enter the project folder name
 echo "Please enter your project folder name:"
 read -r PROJECT_FOLDER
 
-# ترکیب مسیر ثابت با نام پوشه پروژه
+# Combine the base directory with the project folder name
 TARGET_DIR="$BASE_DIR/$PROJECT_FOLDER"
 
-# وارد شدن به مسیر مشخص شده
+# Navigate to the specified project directory
 cd "$TARGET_DIR" || { echo "The entered project folder is not valid: $TARGET_DIR"; exit 1; }
 
-# اگر session با نام my_session وجود دارد، آن را حذف کن
+# Check if a tmux session with the name 'my_session' already exists, and kill it if it does
 if tmux has-session -t my_session 2>/dev/null; then
   echo "An existing tmux session (my_session) was found. Killing it..."
   tmux kill-session -t my_session
 fi
 
-# ایجاد session جدید و تقسیم پنجره به دو قسمت عمودی
+# Create a new tmux session and split the window vertically
 tmux new-session -d -s my_session
-tmux split-window -v  # تقسیم عمودی
+tmux split-window -v  # Vertical split
 
-# اجرای دستور docker-compose در پنل بالا
+# Run the docker-compose command in the top pane
 tmux send-keys -t my_session:0.0 "docker compose -f docker-compose.dev.yaml up" C-m
 
-# اتصال به session tmux
+# Attach to the tmux session
 tmux attach-session -t my_session
