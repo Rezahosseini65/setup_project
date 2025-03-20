@@ -15,4 +15,18 @@ This script automates the setup of a project environment using `tmux` and `docke
 - Attaches the user to the `tmux` session.
 
 ---
-...
+
+## Example
+
+### Scenario:
+You have a project folder named `my_project` located in `/home/reza/djprojects`. You want to set up the environment using this script.
+
+### Steps:
+1. Clone the repository (if not already done):
+   ```bash
+   git clone https://github.com/Rezahosseini65/setup_project.git
+   cd setup_project
+
+2. chmod +x setup_project.sh
+
+3. ./setup_project.sh
