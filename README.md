@@ -27,6 +27,6 @@ You have a project folder named `my_project` located in `/home/reza/djprojects`.
    git clone https://github.com/Rezahosseini65/setup_project.git
    cd setup_project
 
-2. chmod +x setup_project.sh
+    2. chmod +x setup_project.sh
 
-3. ./setup_project.sh
+    3. ./setup_project.sh
