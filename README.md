@@ -28,7 +28,7 @@ You have a project folder named `my_project` located in `/home/reza/djprojects`.
    cd setup_project
 
 2. Make the script executable:
-    ‍‍‍‍‍‍‍```bash
+    ```bash
     chmod +x setup_project.sh
 
 3. Run the script:
